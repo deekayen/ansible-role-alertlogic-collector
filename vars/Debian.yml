@@ -7,5 +7,5 @@ al_remote_syslog_ng_source: "{{ ( ansible_distribution_major_version >= '7' ) | 
 al_remote_base_url: 'https://scc.alertlogic.net'
 al_remote_pkg_name_prefix: 'al-log-syslog_LATEST_'
 al_remote_pkg_url: "{{ al_remote_base_url }}/software/{{ al_remote_pkg_name_prefix }}{{ al_remote_pkg_name_arch }}.{{ al_remote_pkg_name_ext }}"
-al_remote_gpg_key: "{{ al_agent_base_url }}/software/al-agent-pkg-key.asc"
+al_remote_gpg_key: "{{ al_remote_base_url }}/software/al-agent-pkg-key.asc"
 al_remote_gpg_fingerprint: '9a2a3e9a817127b121b2b2fb00802f0e0186cc36'
