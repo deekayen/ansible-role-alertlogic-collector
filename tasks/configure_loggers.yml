@@ -1,0 +1,23 @@
+---
+
+- name: Test for rsyslog being installed
+  ansible.builtin.stat:
+    path: "/etc/rsyslog.conf"
+  register: rsyslog_init
+  tags: rsyslog
+
+- name: Test for syslog-ng being installed
+  ansible.builtin.stat:
+    path: "/etc/init.d/syslog-ng"
+  register: syslog_ng_init
+  tags: syslog_ng
+
+- name: Include _rsyslog.yml when rsyslog being used
+  include: _rsyslog.yml
+  when: rsyslog_init.stat.exists
+  tags: [rsyslog, configure_al_collector_syslog]
+
+- name: Include _syslog_ng.yml when syslog-ng being used
+  include: _syslog_ng.yml
+  when: syslog_ng_init.stat.exists
+  tags: [syslog_ng, configure_al_collector_syslog]

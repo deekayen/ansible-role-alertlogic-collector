@@ -1,0 +1,26 @@
+---
+
+- name: Set Linux optional configs facts
+  ansible.builtin.set_fact:
+    al_remote_configure_options: ""
+
+- name: Set Linux optional configs fact for using proxy
+  ansible.builtin.set_fact:
+    al_remote_configure_options: "{{ al_remote_configure_options }} --proxy {{ al_remote_proxy_url }}"
+  when: al_remote_proxy_url is defined
+
+- name: Set Linux optional configs fact for egress host and port
+  ansible.builtin.set_fact: al_remote_configure_options="{{ al_remote_configure_options }}
+     --host {{ al_remote_egress_host }}
+     --port {{ al_remote_egress_port }}"
+  when: al_remote_egress_port is defined and al_remote_egress_host is defined
+
+- name: Set Linux optional configs fact for egress host only
+  ansible.builtin.set_fact:
+    al_remote_configure_options: "{{ al_remote_configure_options }} --host {{ al_remote_egress_host }}"
+  when: al_remote_egress_port is defined and al_remote_egress_host is not defined
+
+- name: Configure Alert Logic Agent (optional)
+  ansible.builtin.command: "/etc/init.d/al-remote configure {{ al_remote_configure_options }}"
+  tags: configure_al_collector
+  when: not agent_provisioned.stat.exists

@@ -1,0 +1,23 @@
+---
+
+- name: Insert/Update syslog-ng.conf for inclusion of alertlogic.conf
+  ansible.builtin.lineinfile:
+    dest: /etc/syslog-ng/syslog-ng.conf
+    regexp: /etc/syslog-ng/conf.d/alertlogic.conf
+    line: "include '/etc/syslog-ng/conf.d/alertlogic.conf';"
+  notify:
+    - reload syslog-ng
+  tags: syslog_ng
+  when: syslog_ng_init is success
+
+- name: Ensure alertlogic.conf file is in place for syslog-ng
+  notify:
+    - reload syslog-ng
+  tags: syslog_ng
+  ansible.builtin.template:
+    src: templates/etc/syslog-ng/alertlogic.conf
+    dest: /etc/syslog-ng/conf.d/alertlogic.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: syslog_ng_init is success

@@ -1,0 +1,11 @@
+---
+
+al_remote_initscript: 'rsyslog'
+al_remote_pkg_name_arch: "{{ ansible_architecture }}"
+al_remote_pkg_name_ext: 'rpm'
+al_remote_syslog_ng_source: "{{ ( ansible_distribution_major_version >= '6' ) | ternary('s_all', 's_sys') }}"
+al_remote_base_url: 'https://scc.alertlogic.net'
+al_remote_pkg_name_prefix: 'al-log-syslog-LATEST-1.'
+al_remote_pkg_url: "{{ al_remote_base_url }}/software/{{ al_remote_pkg_name_prefix }}{{ al_remote_pkg_name_arch }}.{{ al_remote_pkg_name_ext }}"
+al_remote_gpg_key: "https://keys.openpgp.org/vks/v1/by-fingerprint/9A2A3E9A817127B121B2B2FB00802F0E0186CC36"
+al_remote_gpg_fingerprint: '9A2A3E9A817127B121B2B2FB00802F0E0186CC36'

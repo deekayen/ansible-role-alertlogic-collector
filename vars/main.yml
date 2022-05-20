@@ -1,0 +1,5 @@
+---
+
+### Uncomment for global or place in group/host vars for granular control ###
+# al_remote_registration_key: 'your_registration_key_here'
+al_remote_for_imaging: false

@@ -1,0 +1,37 @@
+---
+
+- name: Import Alert Logic Atlas GPG key on Debian/Ubuntu.
+  ansible.builtin.apt_key:
+    id: "{{ al_remote_gpg_fingerprint }}"
+    keyserver: "{{ al_remote_gpg_keyserver }}"
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Alert Logic Agent on Debian/Ubuntu.
+  ansible.builtin.apt:
+    deb: "{{ al_remote_pkg_url }}"
+  tags: install_al_collector
+  register: install_result
+  retries: 3
+  until: install_result is success
+  when: ansible_os_family == "Debian"
+
+- name: Import Alert Logic Atlas GPG key on CentOS/RHEL.
+  ansible.builtin.rpm_key:
+    key: "{{ al_remote_gpg_key }}"
+    fingerprint: "{{ al_remote_gpg_fingerprint }}"
+    state: present
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install Alert Logic Agent on CentOS/RHEL.
+  ansible.builtin.yum:
+    name: "{{ al_remote_pkg_url }}"
+    state: present
+    disable_gpg_check: "{{ disable_gpg_check }}"
+  tags: install_al_collector
+  register: install_result
+  retries: 3
+  until: install_result is success
+  when:
+    - ansible_os_family == "RedHat"

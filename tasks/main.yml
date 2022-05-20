@@ -1,0 +1,42 @@
+---
+
+- name: Include Ansible OS family variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+  tags: always
+
+- name: Include syslog collector installation file.
+  include: install_collector.yml
+  tags: [install_collector]
+
+- name: Check provisioning state.
+  ansible.builtin.stat:
+    path: /var/alertlogic/lib/remote/etc/host_key.pem
+  register: collector_provisioned
+  ignore_errors: true
+  tags:
+    - configure_al_collector
+    - provision_al_collector
+
+- name: Include Agent optional configuration file
+  include: configure_collector.yml
+  tags: [configure_al_collector]
+
+- name: Include Agent Provisioning file
+  include: provision_collector.yml
+  tags: [provision_al_collector]
+
+- name: Include configuration steps required for log collection in Linux
+  include: configure_loggers.yml
+  tags: [provision_al_collector]
+
+- name: Include check for SELinux policy requirements
+  include: selinux.yml
+  tags: [selinux]
+
+- name: Start the Alert Logic Agent service
+  ansible.builtin.service:
+    name: al-log-syslog
+    state: started
+    enabled: true
+  tags: install_al_collector
+  when: not al_collector_for_imaging
