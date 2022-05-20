@@ -1,9 +1,9 @@
 ---
 
-- name: Import Alert Logic Atlas GPG key on Debian/Ubuntu.
+- name: Import Alert Logic GPG key on Debian/Ubuntu.
   ansible.builtin.apt_key:
     id: "{{ al_remote_gpg_fingerprint }}"
-    keyserver: "{{ al_remote_gpg_keyserver }}"
+    url: "{{ al_remote_gpg_key }}"
     state: present
   when: ansible_os_family == "Debian"
 
@@ -16,7 +16,7 @@
   until: install_result is success
   when: ansible_os_family == "Debian"
 
-- name: Import Alert Logic Atlas GPG key on CentOS/RHEL.
+- name: Import Alert Logic GPG key on CentOS/RHEL.
   ansible.builtin.rpm_key:
     key: "{{ al_remote_gpg_key }}"
     fingerprint: "{{ al_remote_gpg_fingerprint }}"
