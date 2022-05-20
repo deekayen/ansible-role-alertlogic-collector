@@ -39,4 +39,4 @@
     state: started
     enabled: true
   tags: install_al_collector
-  when: not al_collector_for_imaging
+  when: not al_remote_for_imaging
