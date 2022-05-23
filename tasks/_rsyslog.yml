@@ -1,13 +1,13 @@
 ---
 
 - name: Configure rsyslogd
-  notify:
-    - restart rsyslog
-  tags: rsyslog
   ansible.builtin.template:
-    src: templates/etc/rsyslog/alertlogic.conf
-    dest: /etc/rsyslog.d/alertlogic.conf
+    src: templates/etc/rsyslog/al-remote.conf
+    dest: /etc/rsyslog.d/al-remote.conf
     owner: root
     group: root
     mode: 0644
   when: rsyslog_init is success
+  notify:
+    - restart rsyslog
+  tags: rsyslog

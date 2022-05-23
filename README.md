@@ -1,10 +1,8 @@
-# Ansible Role: alcollector
+# Alert Logic remote collector
 
 [![Molecule](https://github.com/deekayen/ansible-role-alertlogic-collector/actions/workflows/ci.yml/badge.svg)](https://github.com/deekayen/ansible-role-alertlogic-collector/actions/workflows/ci.yml) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 
-This playbook is used to install and configure the Alert Logic agent.
-
-Forked from the abandoned project originally sponsored by Alert Logic at https://github.com/alertlogic/al-agents-ansible-playbooks.
+This playbook is used to install and configure the Alert Logic remote collector service.
 
 ## Requirements
 
@@ -42,22 +40,15 @@ RHEL/CentOS versions:
     - name: Install Alert Logic remote collector to specific hosts
       hosts: al_collectors
       roles:
-        - { role: deekayen.alremote}
+        - role: deekayen.alremote
+          vars:
+            al_remote_registration_key: 'useWhenNotInAWSorAzure'
 
 ## Configurations
 
 The variable `al_remote_for_imaging` determine your installation type.  It is a boolean value and by default is `false`.  Setting this value to true will prepare your agent for imaging only and will not provision the agent.
 
 Performing an agent install using the cookbook's default attributes, will setup the agent and provision the instance immediately. If you have properly set your registration key, your host should appear within Alert Logic's Console within 15 minutes. Note: in AWS and Azure deployments the use of the key is optional and in general not necessary.
-
-## Contributing
-
-1. Fork the repository on GitHub
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using GitHub
 
 ## License and Authors
 
@@ -69,5 +60,5 @@ Original Authors of Alert Logic agent role:
 Muram Mohamed (mmohamed@alertlogic.com)
 Justin Early (jearly@alertlogic.com)
 
-Derivative work collector install by:
+Derivative work remote collector install by:
 David Norman [deekayen](https://github.com/deekayen)
