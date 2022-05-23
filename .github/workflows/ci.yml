@@ -15,8 +15,8 @@ jobs:
           - centos8
           - debian10
           - debian11
-          - ubuntu 2004
-          - ubuntu 2204
+          - ubuntu2004
+          - ubuntu2204
 
     steps:
       - name: Check out the codebase.
