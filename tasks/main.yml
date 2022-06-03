@@ -17,10 +17,6 @@
     - configure_al_collector
     - provision_al_collector
 
-- name: Include Agent optional configuration file
-  include: configure_collector.yml
-  tags: [configure_al_collector]
-
 - name: Include Agent Provisioning file
   include: provision_collector.yml
   tags: [provision_al_collector]

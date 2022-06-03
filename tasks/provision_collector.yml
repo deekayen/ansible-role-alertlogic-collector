@@ -10,13 +10,13 @@
   when: al_remote_registration_key is defined and al_remote_registration_key != "your_registration_key_here"
 
 - name: Provision Alert Logic Collector
-  ansible.builtin.command: "/etc/init.d/al-remote provision {{ al_remote_provision_options | join(' ') }}"
+  ansible.builtin.command: "/etc/init.d/al-log-syslog provision --key {{ al_remote_provision_options | join(' ') }}"
   notify:
     - restart al-log-syslog
   tags: provision_al_collector
   when: not al_remote_for_imaging and not collector_provisioned.stat.exists and al_remote_provision_options != "[]"
 
 - name: Provision Alert Logic Collector - for Imaging
-  ansible.builtin.command: "/etc/init.d/al-remote provision {{ al_remote_provision_options | join(' ') }}"
+  ansible.builtin.command: "/etc/init.d/al-log-syslog provision --key {{ al_remote_provision_options | join(' ') }}"
   tags: provision_al_collector
   when: al_remote_for_imaging and not collector_provisioned.stat.exists and al_remote_provision_options != "[]"
