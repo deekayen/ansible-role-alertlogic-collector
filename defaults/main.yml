@@ -1,3 +1,4 @@
 ---
 
 disable_gpg_check: false
+al_remote_registration_key: "your_registration_key_here"
