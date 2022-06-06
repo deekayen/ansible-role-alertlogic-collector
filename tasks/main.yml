@@ -10,7 +10,7 @@
 
 - name: Check provisioning state.
   ansible.builtin.stat:
-    path: /var/alertlogic/lib/remote/etc/host_key.pem
+    path: /var/alertlogic/lib/remote/etc/host_uuid
   register: collector_provisioned
   ignore_errors: true
   tags:
