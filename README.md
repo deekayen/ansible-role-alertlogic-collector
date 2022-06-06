@@ -26,9 +26,6 @@ RHEL/CentOS versions:
 ## Role Variables
 
 * `al_remote_registration_key` - your unique registration key, required except in supported cloud deployments (AWS, Azure) String defaults to `your_registration_key_here`
-* `al_remote_for_imaging` - The `al_remote_for_imaging` variable determines if the agent will be configured and provisioned.  If  set to `true` then the install process performs an installation of the agent but will not start the agent once installation is completed.  This allows for instance snapshots to be saved and started for later use.  With this variables set to `false` then the provisioning process is performed during setup and the agent is started once complete.  Boolean defaults to `false`
-* `al_remote_egress_host`,`al_remote_egress_port` - By default all traffic is sent to <https://vaporator.alertlogic.com.>  This variable is useful if you have a machine that is responsible for outbound traffic (NAT box).  If you specify your own URL ensure that it is a properly formatted URI.  String defaults to `https://vaporator.alertlogic.com`
-* `al_remote_proxy_url` - By default al-agent does not require the use of a proxy.  This variable is useful if you want to avoid a single point of egress.  When a proxy is used, both `al_remote_egress_host` and `al_remote_proxy_url` values are required.  If you specify a proxy URL ensure that it is a properly formatted URI.  String defaults to `nil`
 
 ## Dependencies
 
