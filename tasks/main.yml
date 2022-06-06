@@ -20,6 +20,7 @@
 - name: Include Agent Provisioning file
   include: provision_collector.yml
   tags: [provision_al_collector]
+  when: not collector_provisioned.stat.exists
 
 - name: Include configuration steps required for log collection in Linux
   include: configure_loggers.yml
