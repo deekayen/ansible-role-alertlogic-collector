@@ -49,8 +49,6 @@ Performing an agent install using the cookbook's default attributes, will setup 
 
 ## License and Authors
 
-License:
-
 Distributed under the Apache 2.0 license.
 
 Original Authors of Alert Logic agent role:
