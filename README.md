@@ -6,22 +6,7 @@ This playbook is used to install and configure the Alert Logic remote collector 
 
 ## Requirements
 
-The following platforms are supported.
-
-Debian versions:
-
-* buster
-* bullseye
-
-Ubuntu versions:
-
-* 22.04
-* 20.04
-
-RHEL/CentOS versions:
-
-* 7.x
-* 8.x
+Debian and Enterprise Linux are the tested and supported platforms.
 
 ## Role Variables
 

@@ -1,7 +1,7 @@
 ---
 
 - name: Configure SELinux to allow port 1515 for Alert Logic collector
-  seport:
+  community.general.system.seport:
       ports: 1515
       proto: tcp
       setype: syslogd_port_t

@@ -6,7 +6,7 @@ galaxy_info:
   author: David Norman
   description: Configure and Install Alert Logic remote collector service.
   license: Apache
-  min_ansible_version: 2.9
+  min_ansible_version: '2.13'
   issue_tracker_url: https://github.com/deekayen/ansible-role-alertlogic-collector/issues
   platforms:
     - name: Debian
@@ -19,8 +19,7 @@ galaxy_info:
         - jammy
     - name: EL
       versions:
-        - 7
-        - 8
+        - all
 
   galaxy_tags:
     - monitoring

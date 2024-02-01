@@ -6,7 +6,7 @@
     dest: /etc/rsyslog.d/al-remote.conf
     owner: root
     group: root
-    mode: 0644
+    mode: '644'
   when: rsyslog_init is success
   notify:
     - restart rsyslog

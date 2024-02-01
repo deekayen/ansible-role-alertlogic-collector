@@ -5,7 +5,7 @@
   tags: always
 
 - name: Include syslog collector installation file.
-  include: install_collector.yml
+  ansible.builtin.include_tasks: install_collector.yml
   tags: [install_collector]
 
 - name: Check provisioning state.
@@ -18,16 +18,16 @@
     - provision_al_collector
 
 - name: Include Agent Provisioning file
-  include: provision_collector.yml
+  ansible.builtin.include_tasks: provision_collector.yml
   tags: [provision_al_collector]
   when: not collector_provisioned.stat.exists
 
 - name: Include configuration steps required for log collection in Linux
-  include: configure_loggers.yml
+  ansible.builtin.include_tasks: configure_loggers.yml
   tags: [provision_al_collector]
 
 - name: Include check for SELinux policy requirements
-  include: selinux.yml
+  ansible.builtin.include_tasks: selinux.yml
   tags: [selinux]
 
 - name: Start the Alert Logic Agent service
