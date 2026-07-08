@@ -1,7 +1,8 @@
 ---
-
-- name: Provision Alert Logic Collector
+- name: Provision Alert Logic Collector.
   ansible.builtin.command: "/etc/init.d/al-log-syslog provision --key {{ al_remote_registration_key }}"
+  register: al_remote_provision
+  changed_when: al_remote_provision.rc == 0
   notify:
-    - restart al-log-syslog
+    - Restart al-log-syslog.
   tags: provision_al_collector

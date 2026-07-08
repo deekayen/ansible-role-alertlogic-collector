@@ -1,10 +1,11 @@
 ---
-
 - name: Import Alert Logic GPG key on Debian/Ubuntu.
-  ansible.builtin.apt_key:
-    id: "{{ al_remote_gpg_fingerprint }}"
+  ansible.builtin.get_url:
     url: "{{ al_remote_gpg_key }}"
-    state: present
+    dest: /etc/apt/trusted.gpg.d/al-agent-pkg-key.asc
+    owner: root
+    group: root
+    mode: '0644'
   when: ansible_os_family == "Debian"
 
 - name: Install Alert Logic Agent on Debian/Ubuntu.
@@ -25,7 +26,7 @@
     - ansible_os_family == "RedHat"
 
 - name: Install Alert Logic Agent on CentOS/RHEL.
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ al_remote_pkg_url }}"
     state: present
     disable_gpg_check: "{{ disable_gpg_check }}"

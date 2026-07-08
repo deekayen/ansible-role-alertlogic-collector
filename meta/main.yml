@@ -1,29 +1,36 @@
 ---
-
 galaxy_info:
-  role_name: alremote
   namespace: deekayen
+  role_name: alremote
   author: David Norman
   description: Configure and Install Alert Logic remote collector service.
-  license: Apache
-  min_ansible_version: '2.13'
+
+  github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-alertlogic-collector/issues
+
+  license: Apache-2.0
+  min_ansible_version: "2.15"
+
   platforms:
     - name: Debian
       versions:
-        - buster
         - bullseye
+        - bookworm
     - name: Ubuntu
       versions:
-        - focal
         - jammy
+        - noble
     - name: EL
       versions:
-        - all
+        - "8"
+        - "9"
 
   galaxy_tags:
     - monitoring
     - alertlogic
     - ids
+    - logging
+    - syslog
+    - security
 
 dependencies: []

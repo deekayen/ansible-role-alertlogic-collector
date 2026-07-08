@@ -1,8 +1,13 @@
 ---
+- name: Validate role variables.
+  ansible.builtin.import_tasks: assert.yml
+  tags:
+    - always
 
-- name: Include Ansible OS family variables
+- name: Include Ansible OS family variables.
   ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-  tags: always
+  tags:
+    - always
 
 - name: Include syslog collector installation file.
   ansible.builtin.include_tasks: install_collector.yml
@@ -12,25 +17,24 @@
   ansible.builtin.stat:
     path: /var/alertlogic/lib/remote/etc/host_uuid
   register: collector_provisioned
-  ignore_errors: true
   tags:
     - configure_al_collector
     - provision_al_collector
 
-- name: Include Agent Provisioning file
+- name: Include agent provisioning file.
   ansible.builtin.include_tasks: provision_collector.yml
   tags: [provision_al_collector]
   when: not collector_provisioned.stat.exists
 
-- name: Include configuration steps required for log collection in Linux
+- name: Include configuration steps required for log collection in Linux.
   ansible.builtin.include_tasks: configure_loggers.yml
   tags: [provision_al_collector]
 
-- name: Include check for SELinux policy requirements
+- name: Include check for SELinux policy requirements.
   ansible.builtin.include_tasks: selinux.yml
   tags: [selinux]
 
-- name: Start the Alert Logic Agent service
+- name: Start the Alert Logic Agent service.
   ansible.builtin.service:
     name: al-log-syslog
     state: started

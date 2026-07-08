@@ -1,0 +1,31 @@
+---
+argument_specs:
+  main:
+    short_description: Configure and Install Alert Logic remote collector service.
+    description:
+      - Installs the Alert Logic remote log collector (al-log-syslog),
+        provisions it with a registration key, and configures rsyslog or
+        syslog-ng to forward logs to the local collector.
+    author:
+      - David Norman
+    options:
+      disable_gpg_check:
+        type: bool
+        default: false
+        description: >-
+          Disable the GPG signature check when installing the collector
+          package on RedHat-family systems.
+
+      al_remote_registration_key:
+        type: str
+        default: your_registration_key_here
+        description: >-
+          Alert Logic registration key used to provision the collector.
+          Required except in supported cloud deployments (AWS, Azure).
+
+      al_remote_for_imaging:
+        type: bool
+        default: false
+        description: >-
+          Prepare the agent for machine imaging only. When true, the
+          al-log-syslog service is not started or enabled.

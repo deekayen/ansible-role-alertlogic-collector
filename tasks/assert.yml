@@ -1,0 +1,16 @@
+---
+- name: Assert al_remote_registration_key is not empty.
+  ansible.builtin.assert:
+    that:
+      - al_remote_registration_key | length > 0
+    fail_msg: >-
+      al_remote_registration_key must not be empty; set your Alert Logic
+      registration key.
+    quiet: true
+
+- name: Warn when the registration key is still the placeholder.
+  ansible.builtin.debug:
+    msg: >-
+      al_remote_registration_key is still the placeholder value; provisioning
+      will fail outside of supported cloud deployments (AWS, Azure).
+  when: al_remote_registration_key == 'your_registration_key_here'

@@ -1,18 +1,15 @@
 ---
-# Handler to handle common notifications. Handlers are called by other plays.
-# See http://docs.ansible.com/playbooks_intro.html for more information about handlers.
-
-- name: restart al-log-syslog
+- name: Restart al-log-syslog.
   ansible.builtin.service:
     name: al-log-syslog
     state: restarted
 
-- name: reload syslog-ng
+- name: Reload syslog-ng.
   ansible.builtin.service:
     name: syslog-ng
     state: reloaded
 
-- name: restart rsyslog
+- name: Restart rsyslog.
   ansible.builtin.service:
     name: rsyslog
     state: restarted

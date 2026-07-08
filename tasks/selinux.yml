@@ -1,10 +1,9 @@
 ---
-
-- name: Configure SELinux to allow port 1515 for Alert Logic collector
-  community.general.system.seport:
-      ports: 1515
-      proto: tcp
-      setype: syslogd_port_t
-      state: present
+- name: Configure SELinux to allow port 1515 for Alert Logic collector.
+  community.general.seport:
+    ports: 1515
+    proto: tcp
+    setype: syslogd_port_t
+    state: present
   tags: selinux
   when: ansible_selinux and ansible_selinux.status == 'enabled'
