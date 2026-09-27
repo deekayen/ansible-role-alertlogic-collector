@@ -6,4 +6,4 @@
     setype: syslogd_port_t
     state: present
   tags: selinux
-  when: ansible_selinux and ansible_selinux.status == 'enabled'
+  when: ansible_facts.selinux.status | default('disabled') == 'enabled'

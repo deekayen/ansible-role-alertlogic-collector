@@ -6,7 +6,7 @@ This playbook is used to install and configure the Alert Logic remote collector 
 
 ## Requirements
 
-Debian and Enterprise Linux are the tested and supported platforms.
+Tested with Molecule on EL 9/10, Amazon Linux 2023, Ubuntu 22.04/24.04/26.04, and Debian 12/13.
 
 ## Role Variables
 

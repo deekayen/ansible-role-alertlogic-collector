@@ -25,4 +25,4 @@ provisioner:
     ANSIBLE_SKIP_TAGS: provision_al_collector,configure_al_collector
 
 verifier:
-  name: ansible
+  name: testinfra
