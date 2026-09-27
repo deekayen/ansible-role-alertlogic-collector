@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: '0644'
-  when: ansible_os_family == "Debian"
+  when: ansible_facts.os_family == "Debian"
 
 - name: Install Alert Logic Agent on Debian/Ubuntu.
   ansible.builtin.apt:
@@ -15,7 +15,7 @@
   register: install_result
   retries: 3
   until: install_result is success
-  when: ansible_os_family == "Debian"
+  when: ansible_facts.os_family == "Debian"
 
 - name: Import Alert Logic GPG key on CentOS/RHEL.
   ansible.builtin.rpm_key:
@@ -23,7 +23,7 @@
     fingerprint: "{{ al_remote_gpg_fingerprint }}"
     state: present
   when:
-    - ansible_os_family == "RedHat"
+    - ansible_facts.os_family == "RedHat"
 
 - name: Install Alert Logic Agent on CentOS/RHEL.
   ansible.builtin.dnf:
@@ -35,4 +35,4 @@
   retries: 3
   until: install_result is success
   when:
-    - ansible_os_family == "RedHat"
+    - ansible_facts.os_family == "RedHat"
